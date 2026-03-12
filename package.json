@@ -1,0 +1,24 @@
+{
+  "name": "cse341-contact-project",
+  "version": "1.0.0",
+  "description": "Contact API project for CSE341",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leviomagbemi/cse341-contact-project.git"
+  },
+  "keywords": [],
+  "author": "Levi Omagbemi",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/leviomagbemi/cse341-contact-project/issues"
+  },
+  "homepage": "https://github.com/leviomagbemi/cse341-contact-project#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
