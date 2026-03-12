@@ -3,5 +3,5 @@ const uri = process.env.CONNECTIONSTRING;
 
 const client = new MongoClient(uri);
 
-modules.export = client;
+module.exports = client;
 

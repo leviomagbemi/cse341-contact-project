@@ -2,9 +2,13 @@ require('dotenv').config()
 
 const express = require('express');
 const mongoClient = require('./dataAccess/connection.js');
+const contacts = require('./routes/contactRoute.js');
+
 const app = express();
 
 const serverPort = process.env.PORT;
+
+app.use('/contacts', contacts);
 
 //connect to database and start server
 (async () => {
