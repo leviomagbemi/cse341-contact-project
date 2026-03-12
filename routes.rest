@@ -1,0 +1,5 @@
+// Get all contacts
+GET https://cse341-contact-project-qd96.onrender.com/contacts
+
+// Get a single contact by Id
+GET https://cse341-contact-project-qd96.onrender.com/contacts/69b292af76b4c6b3b17f7475
