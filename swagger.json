@@ -5,10 +5,10 @@
     "description": "CSE341 Contact API Project",
     "version": "1.0.0"
   },
-  "host": "https://cse341-contact-project-qd96.onrender.com",
+  "host": "cse341-contact-project-qd96.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/contacts/": {
