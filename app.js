@@ -3,11 +3,15 @@ require('dotenv').config()
 const express = require('express');
 const mongoClient = require('./dataAccess/connection.js');
 const contacts = require('./routes/contactRoute.js');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 const app = express();
 
 const serverPort = process.env.PORT;
 
+app.use(express.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/contacts', contacts);
 
 //connect to database and start server

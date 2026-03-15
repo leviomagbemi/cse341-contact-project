@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev": "node --watch app.js"
+    "dev": "nodemon app.js",
+    "swagger": "node ./swagger.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,11 @@
   "dependencies": {
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "mongodb": "^7.1.0"
+    "mongodb": "^7.1.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "swagger-autogen": "^2.23.7"
   }
 }
