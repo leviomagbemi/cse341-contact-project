@@ -5,33 +5,73 @@
     "description": "CSE341 Contact API Project",
     "version": "1.0.0"
   },
-  "host": "cse341-contact-project-qd96.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
+    "http"
   ],
   "paths": {
     "/contacts/": {
       "get": {
-        "summary": "Get all contacts",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Successfully retrieved contacts"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "OK"
           }
         }
       },
       "post": {
-        "summary": "Create a new contact",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
         "parameters": [
+          {
+            "in": "body",
+            "name": "contact",
+            "description": "Contact object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        ]
+      }
+    },
+    "/contacts/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "in": "body",
             "name": "contact",
@@ -43,91 +83,30 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Contact created successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/contacts/{id}": {
-      "get": {
-        "summary": "Get contact by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Contact ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
           "200": {
-            "description": "Contact retrieved"
+            "description": "OK"
           },
-          "404": {
-            "description": "Contact not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "summary": "Update a contact",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Contact ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "contact",
-            "description": "Updated contact object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Contact"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Contact updated successfully"
-          },
-          "404": {
-            "description": "Contact not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
       "delete": {
-        "summary": "Delete a contact",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "Contact ID",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Contact deleted successfully"
+          "204": {
+            "description": "No Content"
           },
-          "404": {
-            "description": "Contact not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -136,13 +115,6 @@
   "definitions": {
     "Contact": {
       "type": "object",
-      "required": [
-        "firstName",
-        "lastName",
-        "email",
-        "favoriteColor",
-        "birthday"
-      ],
       "properties": {
         "firstName": {
           "type": "string",
