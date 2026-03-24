@@ -1,41 +1,39 @@
 // Database queries
-const { ObjectId } = require('mongodb');
-
-const dbName = 'contact_db';
-const collectionName = 'contact';
+const Contact = require('../models/Contact');
 
 // Get all contacts
-async function getContacts(client){
-  const results = await client.db(dbName).collection(collectionName).find({}).toArray();
-
+async function getContacts(){
+  const results = await Contact.find({});
   return results;
 }
 
 // Get single contact by ID
-async function getContact(client, contactId){
-  const result = await client.db(dbName).collection(collectionName).findOne({ _id: new ObjectId(contactId) });
+async function getContact(contactId){
+  const result = await Contact.findOne({ _id: contactId });
 
   return result;
 }
 
-// Create a new contact
-async function createNewContact(client, document){
-  const result = await client.db(dbName).collection(collectionName).insertOne(document);
-
+// // Create a new contact
+async function createNewContact(document){
+  const result = await Contact.create(document);
   return result;
 }
 
 
 // Update a contact by id
-async function updateContact(client, contactId, document){
-  const result = await client.db(dbName).collection(collectionName).updateOne({ _id: new ObjectId(contactId) }, { $set: document });
+async function updateContact(contactId, document){
+  const result = await Contact.findByIdAndUpdate(contactId, document, {
+    new: true,
+    runValidators: true
+  });
 
   return result;
 }
 
 // Delete a contact by id
-async function deleteContact(client, contactId){
-  const result = await client.db(dbName).collection(collectionName).deleteOne({ _id: new ObjectId(contactId) });
+async function deleteContact(contactId){
+  const result = await Contact.findByIdAndDelete(contactId);
 
   return result;
 }

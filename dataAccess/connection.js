@@ -1,6 +1,3 @@
-const { MongoClient } = require('mongodb');
-const uri = process.env.CONNECTIONSTRING;
+const mongoose = require('mongoose');
 
-const client = new MongoClient(uri);
-
-module.exports = client;
+module.exports = mongoose;

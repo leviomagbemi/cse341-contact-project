@@ -1,11 +1,13 @@
 require('dotenv').config()
 
 const express = require('express');
-const mongoClient = require('./dataAccess/connection.js');
+const  mongoose = require('./dataAccess/connection.js')
 const contacts = require('./routes/contactRoute.js');
 const swaggerUi = require('swagger-ui-express');
 const cors = require('express-cors')
 const swaggerDocument = require('./swagger.json');
+const notFound = require('./middleware/notFound.js');
+const errorHandler = require('./middleware/errorHandler.js');
 
 const app = express();
 
@@ -13,18 +15,21 @@ const serverPort = process.env.PORT;
 
 app.use(cors({
     allowedOrigins: [
-        'https://cse341-contact-project-qd96.onrender.com'
+        'https://cse341-contact-project-qd96.onrender.com',
+        'http://localhost:8080'
     ]
 }));
 
 app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/contacts', contacts);
+app.use(notFound);
+app.use(errorHandler);
 
 //connect to database and start server
 (async () => {
   try {
-    await mongoClient.connect();
+    await mongoose.connect(process.env.CONNECTIONSTRING);
 
     app.listen(serverPort, () => {
       console.log('Server running...');
@@ -32,7 +37,7 @@ app.use('/contacts', contacts);
 
     // Gracefully shutdown server 
     process.on('SIGINT', async () => {
-      await mongoClient.close();
+      await mongoose.connection.close();
       process.exit();
     })
   } catch (error) {
